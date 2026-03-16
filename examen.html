@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Examen de práctica</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f0f0f0;
+margin:0;
+padding:0;
+}
+
+header{
+background:#1e88e5;
+color:white;
+padding:15px;
+text-align:center;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+background:white;
+padding:25px;
+margin-top:20px;
+border-radius:10px;
+}
+
+.timer{
+font-size:20px;
+color:red;
+text-align:right;
+}
+
+button{
+padding:12px 20px;
+font-size:16px;
+margin-top:20px;
+cursor:pointer;
+}
+
+.question{
+margin-top:20px;
+}
+
+.result{
+font-size:22px;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h2>Examen de Cultura General</h2>
+</header>
+
+<div class="container">
+
+<div class="timer">
+Tiempo restante: <span id="time">05:00</span>
+</div>
+
+<form id="quiz">
+
+<div class="question">
+<p>1. ¿Capital de Argentina?</p>
+<input type="radio" name="q1"> Córdoba<br>
+<input type="radio" name="q1" id="q1correct"> Buenos Aires<br>
+<input type="radio" name="q1"> Rosario<br>
+</div>
+
+<div class="question">
+<p>2. ¿Cuánto es 8 × 7?</p>
+<input type="radio" name="q2"> 48<br>
+<input type="radio" name="q2"> 54<br>
+<input type="radio" name="q2" id="q2correct"> 56<br>
+</div>
+
+<div class="question">
+<p>3. ¿Planeta más grande?</p>
+<input type="radio" name="q3"> Marte<br>
+<input type="radio" name="q3" id="q3correct"> Júpiter<br>
+<input type="radio" name="q3"> Saturno<br>
+</div>
+
+<div class="question">
+<p>4. ¿Océano más grande?</p>
+<input type="radio" name="q4"> Atlántico<br>
+<input type="radio" name="q4" id="q4correct"> Pacífico<br>
+<input type="radio" name="q4"> Índico<br>
+</div>
+
+<button type="button" onclick="finishExam()">Terminar examen</button>
+
+</form>
+
+<div class="result" id="result"></div>
+
+</div>
+
+<script>
+
+let time = 300;
+
+let timer = setInterval(function(){
+
+time--;
+
+let minutes = Math.floor(time/60);
+let seconds = time % 60;
+
+if(seconds < 10){
+seconds = "0"+seconds;
+}
+
+document.getElementById("time").innerHTML =
+minutes + ":" + seconds;
+
+if(time <= 0){
+clearInterval(timer);
+finishExam();
+}
+
+},1000);
+
+function finishExam(){
+
+clearInterval(timer);
+
+let score=0;
+
+if(document.getElementById("q1correct").checked) score++;
+if(document.getElementById("q2correct").checked) score++;
+if(document.getElementById("q3correct").checked) score++;
+if(document.getElementById("q4correct").checked) score++;
+
+document.getElementById("result").innerHTML =
+"Examen terminado. Puntaje: "+score+" / 4";
+
+document.getElementById("quiz").style.display="none";
+
+}
+
+</script>
+
+</body>
+</html>
